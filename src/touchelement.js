@@ -1,4 +1,4 @@
-// Copyright (c) %%year%% by Code Computerlove (http://www.codecomputerlove.com)
+// Copyright (c) %%year%%  %%copyrightowner%%
 // Licensed under the MIT license
 // version: %%version%%
 
@@ -27,6 +27,10 @@
 		swipeRight: 'swipeRight',
 		swipeUp: 'swipeUp',
 		swipeDown: 'swipeDown',
+		swipeEdgeLeft: 'swipeEdgeLeft',
+		swipeEdgeRight: 'swipeEdgeRight',
+		swipeEdgeUp: 'swipeEdgeUp',
+		swipeEdgeDown: 'swipeEdgeDown',
 		gestureStart: 'gestureStart',
 		gestureChange: 'gestureChange',
 		gestureEnd: 'gestureEnd'

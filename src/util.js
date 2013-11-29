@@ -1,4 +1,4 @@
-// Copyright (c) %%year%% by Code Computerlove (http://www.codecomputerlove.com)
+// Copyright (c) %%year%%  %%copyrightowner%%
 // Licensed under the MIT license
 // version: %%version%%
 

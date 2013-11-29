@@ -1,4 +1,4 @@
-// Copyright (c) %%year%% by Code Computerlove (http://www.codecomputerlove.com)
+// Copyright (c) %%year%%  %%copyrightowner%%
 // Licensed under the MIT license
 // version: %%version%%
 
@@ -197,14 +197,45 @@
 			 * Function: getWheelDelta
 			 */
 			getWheelDelta: function(event){
+			
+				var delta = {
+					x: 0,
+					y: 0,
+					step: false
+				};
 				
-				var delta = 0;
-				
-				if (!Util.isNothing(event.wheelDelta)){
-					delta = event.wheelDelta / 120;
+				if (!Util.isNothing(event.originalEvent.deltaX)){
+					delta.x = -event.originalEvent.deltaX;
+					
+					delta.step = (Math.abs(delta.x) === 3);
+					if (Math.abs(delta.x) > 3){
+						delta.x = delta.x / 100;
+					}
 				}
-				else if (!Util.isNothing(event.detail)){
-					delta = -event.detail / 3;
+				
+				if (!Util.isNothing(event.originalEvent.deltaY)){
+					delta.y = -event.originalEvent.deltaY;
+					
+					if (!delta.step){
+						delta.step = (Math.abs(delta.y) === 3);
+					}
+					if (Math.abs(delta.y) > 3){
+						delta.y = delta.y / 100;
+					}
+					
+					return delta;
+				}
+				
+				if (!Util.isNothing(event.originalEvent.wheelDelta)){
+					delta.y = event.originalEvent.wheelDelta;
+					delta.step = true;
+					
+					return delta;
+				}
+				
+				if (!Util.isNothing(event.originalEvent.detail)){
+					delta.y = -event.originalEvent.detail / 3;
+					delta.step = true;
 				}
 				
 				return delta;
@@ -249,7 +280,6 @@
 			},
 			
 			
-			
 			_isNode: function(obj){
 				return (
 					typeof window.Node === "object" ? obj instanceof window.Node : 
@@ -258,16 +288,20 @@
 			},
 			
 			
-			
 			_normaliseMouseWheelType: function(){
 				
-				if (Util.Browser.isEventSupported('mousewheel')){
+				if (Util.Browser.isEventSupported('wheel')){
+					return 'wheel';
+				}
+				else if (Util.Browser.msie && Util.Browser.version > 8){
+					return 'wheel';
+				}
+				else if (Util.Browser.isEventSupported('mousewheel')){
 					return 'mousewheel';
 				}
 				return 'DOMMouseScroll';
 				
 			},
-			
 			
 			
 			_NATIVE_EVENTS: { 

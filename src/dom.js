@@ -1,4 +1,4 @@
-// Copyright (c) %%year%% by Code Computerlove (http://www.codecomputerlove.com)
+// Copyright (c) %%year%%  %%copyrightowner%%
 // Licensed under the MIT license
 // version: %%version%%
 
@@ -708,6 +708,24 @@
 			windowScrollTop: function(){
 			
 				return window.pageYOffset;
+			
+			},
+			
+			
+			
+			/*
+			 * Function: pixelRatio
+			 */
+			pixelRatio: function(){
+				
+				if (window.devicePixelRatio){
+					return window.devicePixelRatio;
+				}
+				// Internet Explorer 10 and older
+				else if (screen.deviceXDPI && screen.logicalXDPI){
+					return screen.deviceXDPI / screen.logicalXDPI;
+				}
+				return 1;
 			
 			}
 			
