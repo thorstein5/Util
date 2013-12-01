@@ -1,9 +1,11 @@
-// Copyright (c) %%year%%  %%copyrightowner%%
+// Util
+// Copyright (c) %%year%% Code Computerlove and other contributors
 // Licensed under the MIT license
 // version: %%version%%
 
 /*global MSGesture: false */
 
+// touchelement.class.js
 (function(window, klass, Util){
 
 

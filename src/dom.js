@@ -1,7 +1,9 @@
-// Copyright (c) %%year%%  %%copyrightowner%%
+// Util
+// Copyright (c) %%year%% Code Computerlove and other contributors
 // Licensed under the MIT license
 // version: %%version%%
 
+// dom.js
 (function (window, Util) {
 	
 	Util.extend(Util, {
