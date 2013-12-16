@@ -265,9 +265,8 @@
 			if (obj.hasOwnProperty){
 				return obj.hasOwnProperty(propName);
 			}
-			else{
-				return ('undefined' !== typeof obj[propName]);
-			}
+			
+			return ('undefined' !== typeof obj[propName]);
 			
 		}
 		

@@ -383,7 +383,7 @@
 			},
 			_setStyle: function(el, style, value){
 				
-				var prop, val;
+				var prop;
 				
 				if (Util.isObject(style)) {
 					for(prop in style) {
@@ -723,10 +723,12 @@
 				if (window.devicePixelRatio){
 					return window.devicePixelRatio;
 				}
+				
 				// Internet Explorer 10 and older
-				else if (screen.deviceXDPI && screen.logicalXDPI){
+				if (screen.deviceXDPI && screen.logicalXDPI){
 					return screen.deviceXDPI / screen.logicalXDPI;
 				}
+				
 				return 1;
 			
 			}

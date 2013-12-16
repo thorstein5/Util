@@ -629,10 +629,12 @@
 				if (window.devicePixelRatio){
 					return window.devicePixelRatio;
 				}
+				
 				// Internet Explorer 10 and older
-				else if (screen.deviceXDPI && screen.logicalXDPI){
+				if (screen.deviceXDPI && screen.logicalXDPI){
 					return screen.deviceXDPI / screen.logicalXDPI;
 				}
+				
 				return 1;
 			
 			}

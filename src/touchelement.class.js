@@ -515,21 +515,18 @@
 				return;
 
 			}
-			else{
 
-				window.clearTimeout(this.doubleTapTimeout);
-				this.doubleTapTimeout = null;
+			window.clearTimeout(this.doubleTapTimeout);
+			this.doubleTapTimeout = null;
 
-				Util.Events.fire(this, {
-					type: Util.TouchElement.EventTypes.onTouch,
-					target: this,
-					point: this.touchEndPoint,
-					action: Util.TouchElement.ActionTypes.doubleTap,
-					targetEl: e.target,
-					currentTargetEl: e.currentTarget
-				});
-
-			}
+			Util.Events.fire(this, {
+				type: Util.TouchElement.EventTypes.onTouch,
+				target: this,
+				point: this.touchEndPoint,
+				action: Util.TouchElement.ActionTypes.doubleTap,
+				targetEl: e.target,
+				currentTargetEl: e.currentTarget
+			});
 
 		},
 

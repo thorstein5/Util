@@ -1,4 +1,4 @@
 // Util
-// Copyright (c) %%year%% %%copyrightowner%%
+// Copyright (c) %%year%% Code Computerlove and other contributors
 // Licensed under the MIT license
 // version: %%version%%

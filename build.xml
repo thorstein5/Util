@@ -45,7 +45,7 @@
 	
 	<target name="checkJS">
 		
-		<jslint options="browser,indent=0,plusplus,sloppy,white,newcap,nomen,regexp,forin=true">
+		<jslint options="browser,indent=0,plusplus,sloppy,white,newcap,nomen,regexp,forin,unparam">
 			<formatter type="plain" />		
 			<fileset dir="${project.src.dir}" includes="*.js" />
 		</jslint>
@@ -155,7 +155,6 @@
 	
 	<target name="versionStamp">
 		
-		<replace file="${filePath}" token="%%copyrightowner%%" value="${project.copyright.owner}"/>
 		<replace file="${filePath}" token="%%version%%" value="${project.build.version}"/>
 		<replace file="${filePath}" token="%%year%%" value="${project.build.year}"/>
 	

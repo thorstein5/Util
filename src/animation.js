@@ -323,7 +323,7 @@
 					transform = this.getTransform(el.style),
 					style = {};
 				
-				style[this._transformLabel] = style[this._transformLabel] = (Util.Browser.is3dSupported) ? 'translate3d(0px, 0px, 0px)' : 'translate(0px, 0px)';
+				style[this._transformLabel] = (Util.Browser.is3dSupported) ? 'translate3d(0px, 0px, 0px)' : 'translate(0px, 0px)';
 				
 				if (!Util.isNothing(rotationDegs)){
 					style[this._transformLabel] = 'rotate(' + rotationDegs + 'deg) ' + style[this._transformLabel];

@@ -1,2 +1,2 @@
 #!/bin/bash
-tools/apache-ant-1.8.4/bin/ant
+tools/apache-ant-1.9.2/bin/ant

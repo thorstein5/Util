@@ -295,12 +295,15 @@
 				if (Util.Browser.isEventSupported('wheel')){
 					return 'wheel';
 				}
-				else if (Util.Browser.msie && Util.Browser.version > 8){
+				
+				if (Util.Browser.msie && Util.Browser.version > 8){
 					return 'wheel';
 				}
-				else if (Util.Browser.isEventSupported('mousewheel')){
+				
+				if (Util.Browser.isEventSupported('mousewheel')){
 					return 'mousewheel';
 				}
+				
 				return 'DOMMouseScroll';
 				
 			},
