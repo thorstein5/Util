@@ -1013,7 +1013,7 @@
 
 			this.lastGesturePinch = 0;
 
-			var 
+			var
 				touchEvent = Util.Events.getTouchEvent(e),
 				touches = touchEvent.touches,
 				scale = this.getTouchPinchScale(touches);
@@ -1053,7 +1053,7 @@
 
 			e.preventDefault();
 
-			var 
+			var
 				touchEvent = Util.Events.getTouchEvent(e),
 				touches = touchEvent.touches,
 				scale;
@@ -1085,7 +1085,7 @@
 
 			e.preventDefault();
 
-			var 
+			var
 				touchEvent = Util.Events.getTouchEvent(e),
 				touches = (!Util.isNothing(touchEvent.changedTouches)) ? touchEvent.changedTouches : touchEvent.touches,
 				scale;

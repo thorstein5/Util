@@ -64,7 +64,7 @@
 			stop: function(el){
 				
 				if (Util.Browser.isCSSTransitionSupported){
-					var 
+					var
 						style = {};
 					
 					Util.Events.remove(el, this._transitionEndLabel, this._getTransitionEndHandler());
@@ -97,7 +97,7 @@
 			stopSlideTo: function(el){
 				
 				if (Util.Browser.isCSSTransitionSupported){
-					var 
+					var
 						transform,
 						style = {};
 					
@@ -424,7 +424,7 @@
 				
 				window.setTimeout(function(){
 					Util.DOM.setStyle(el, property, val);
-				}, this._applyTransitionDelay);	
+				}, this._applyTransitionDelay);
 				
 			},
 			
@@ -461,12 +461,12 @@
 			 */
 			_leaveTransforms: function(el){
 				
-				var 
+				var
 						property = el.style[this._transitionPrefix + 'Property'],
 						callbackLabel = (property !== '') ? 'ccl' + property + 'callback' : 'cclallcallback',
 						callback,
 						transform = this.getTransform(el.style),
-						transformMatch, 
+						transformMatch,
 						transformExploded,
 						domX = window.parseInt(Util.DOM.getStyle(el, 'left'), 0),
 						domY = window.parseInt(Util.DOM.getStyle(el, 'top'), 0),

@@ -11,12 +11,12 @@
 
 		Function.prototype.bind = function( obj ) {
 			var slice = [].slice,
-					args = slice.call(arguments, 1), 
-					self = this, 
-					nop = function () {}, 
+					args = slice.call(arguments, 1),
+					self = this,
+					nop = function () {},
 					bound = function () {
-						return self.apply( this instanceof nop ? this : ( obj || {} ), 
-																args.concat( slice.call(arguments) ) );
+						return self.apply( this instanceof nop ? this : ( obj || {} ),
+							args.concat( slice.call(arguments) ) );
 					};
 
 			nop.prototype = self.prototype;
@@ -40,9 +40,9 @@
 		
 		/*
 		 * Function: registerNamespace
-		 */			
+		 */
 		registerNamespace: function () {
-			var 
+			var
 				args = arguments, obj = null, i, j, ns, nsParts, root, argsLen, nsPartsLens;
 			for (i=0, argsLen=args.length; i<argsLen; i++) {
 				ns = args[i];
@@ -87,14 +87,14 @@
 				overwriteProperties = true;
 			}
 			if (destination && source && this.isObject(source)){
-				for(prop in source){
-					if (this.objectHasProperty(source, prop)) {
+				for (prop in source){
+					if (this.objectHasProperty(source, prop)){
 						if (overwriteProperties){
 							destination[prop] = source[prop];
 						}
-						else{
-							if(typeof destination[prop] === "undefined"){ 
-								destination[prop] = source[prop]; 
+						else {
+							if (typeof destination[prop] === "undefined"){
+								destination[prop] = source[prop];
 							}
 						}
 					}
@@ -144,7 +144,7 @@
 		/*
 		 * Function: isLikeArray
 		 */
-		isLikeArray: function(obj) { 
+		isLikeArray: function(obj) {
 			return typeof obj.length === 'number';
 		},
 		
@@ -174,7 +174,7 @@
 		
 			if (typeof obj === "undefined" || obj === null) {
 				return true;
-			}	
+			}
 			return false;
 			
 		},
@@ -186,7 +186,7 @@
 		 */
 		swapArrayElements: function(arr, i, j){
 			
-			var temp = arr[i]; 
+			var temp = arr[i];
 			arr[i] = arr[j];
 			arr[j] = temp;
 		

@@ -98,7 +98,7 @@
 		 * http://perfectionkills.com/detecting-event-support-without-browser-sniffing/
 		 */
 		isEventSupported: function(eventName) {
-			var 
+			var
 				el = document.createElement(this._eventTagNames[eventName] || 'div'),
 				isSupported;
 			eventName = 'on' + eventName;
@@ -120,7 +120,7 @@
 		detect3d: function(){
 			var
 				t,
-				el = document.createElement('div'), 
+				el = document.createElement('div'),
 				has3d,
 				transforms = {
 					'webkitTransform' : '-webkit-transform',

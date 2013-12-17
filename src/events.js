@@ -93,7 +93,7 @@
 			 */
 			fire: function(obj, type){
 				
-				var 
+				var
 					i, j,
 					event,
 					listeners,
@@ -115,7 +115,7 @@
 					}
 					
 					isNative = this._NATIVE_EVENTS[type];
-					event = document.createEvent(isNative ? "HTMLEvents" : "UIEvents"); 
+					event = document.createEvent(isNative ? "HTMLEvents" : "UIEvents");
 					event[isNative ? 'initEvent' : 'initUIEvent'](type, true, true, window, 1);
 					
 					// Fire an event on an element that has no extra arguments
@@ -138,7 +138,7 @@
 					event.target = obj;
 				}
 
-				if (!event.type){ 
+				if (!event.type){
 					throw new Error("Event object missing 'type' property.");
 				}
 
@@ -284,7 +284,7 @@
 			
 			_isNode: function(obj){
 				return (
-					typeof window.Node === "object" ? obj instanceof window.Node : 
+					typeof window.Node === "object" ? obj instanceof window.Node :
 					typeof obj === "object" && typeof obj.nodeType === "number" && typeof obj.nodeName==="string"
 				);
 			},
@@ -309,7 +309,7 @@
 			},
 			
 			
-			_NATIVE_EVENTS: { 
+			_NATIVE_EVENTS: {
 				click: 1, dblclick: 1, mouseup: 1, mousedown: 1, contextmenu: 1, //mouse buttons
 				mousewheel: 1, DOMMouseScroll: 1, //mouse wheel
 				mouseover: 1, mouseout: 1, mousemove: 1, selectstart: 1, selectend: 1, //mouse movement
@@ -319,7 +319,7 @@
 				gesturestart: 1, gesturechange: 1, gestureend: 1, // gesture
 				focus: 1, blur: 1, change: 1, reset: 1, select: 1, submit: 1, //form elements
 				load: 1, unload: 1, beforeunload: 1, resize: 1, move: 1, DOMContentLoaded: 1, readystatechange: 1, //window
-				error: 1, abort: 1, scroll: 1 
+				error: 1, abort: 1, scroll: 1
 			}
 			
 		}

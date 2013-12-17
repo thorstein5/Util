@@ -48,7 +48,7 @@
 			 */
 			fire: function(obj, type){
 				
-				var 
+				var
 					event,
 					args = Array.prototype.slice.call(arguments).splice(2);
 				

@@ -76,12 +76,12 @@
 			 */
 			isChildOf: function(childEl, parentEl)
 			{
-				if (parentEl === childEl){ 
-					return false; 
+				if (parentEl === childEl){
+					return false;
 				}
 				while (childEl && childEl !== parentEl)
-				{ 
-					childEl = childEl.parentNode; 
+				{
+					childEl = childEl.parentNode;
 				}
 
 				return childEl === parentEl;
@@ -96,7 +96,7 @@
 				if (Util.isNothing(contextEl)){
 					contextEl = window.document;
 				}
-				var 
+				var
 					els = contextEl.querySelectorAll(selectors),
 					retval = [],
 					i, j;
@@ -114,7 +114,7 @@
 			 */
 			createElement: function(type, attributes, content){
 				
-				var 
+				var
 					attribute,
 					retval = document.createElement(type);
 					
@@ -290,11 +290,11 @@
 				}
 				else{
 					Util.DOM._addClass(el, className);
-				} 
+				}
 				
 			},
 			_addClass: function(el, className){
-				var 
+				var
 					currentClassValue = Util.DOM.getAttribute(el, 'class', ''),
 					re = new RegExp('(?:^|\\s+)' + className + '(?:\\s+|$)');
 				
@@ -327,7 +327,7 @@
 			},
 			_removeClass: function(el, className){
 				
-				var 
+				var
 					currentClassValue = Util.DOM.getAttribute(el, 'class', ''),
 					classes = Util.trim(currentClassValue).split(' '),
 					newClassVal = '',
@@ -506,9 +506,9 @@
 				
 				var retval = Util.DOM.width(el);
 				
-				retval += parseInt(Util.DOM.getStyle(el, 'padding-left'), 10) + parseInt(Util.DOM.getStyle(el, 'padding-right'), 10); 
-				retval += parseInt(Util.DOM.getStyle(el, 'margin-left'), 10) + parseInt(Util.DOM.getStyle(el, 'margin-right'), 10); 
-				retval += parseInt(Util.DOM.getStyle(el, 'border-left-width'), 10) + parseInt(Util.DOM.getStyle(el, 'border-right-width'), 10); 
+				retval += parseInt(Util.DOM.getStyle(el, 'padding-left'), 10) + parseInt(Util.DOM.getStyle(el, 'padding-right'), 10);
+				retval += parseInt(Util.DOM.getStyle(el, 'margin-left'), 10) + parseInt(Util.DOM.getStyle(el, 'margin-right'), 10);
+				retval += parseInt(Util.DOM.getStyle(el, 'border-left-width'), 10) + parseInt(Util.DOM.getStyle(el, 'border-right-width'), 10);
 				return retval;
 			
 			},
@@ -539,7 +539,7 @@
 			 */
 			_getDimension: function(el, dimension){
 				
-				var 
+				var
 					retval = window.parseInt(window.getComputedStyle(el,'').getPropertyValue(dimension)),
 					styleBackup;
 				
@@ -547,7 +547,7 @@
 					
 					// If this is the case, chances are the element is not displayed and we can't get
 					// the width and height. This temporarily shows and hides to get the value
-					styleBackup = { 
+					styleBackup = {
 						display: el.style.display,
 						left: el.style.left
 					};
@@ -573,9 +573,9 @@
 				
 				var retval = Util.DOM.height(el);
 				
-				retval += parseInt(Util.DOM.getStyle(el, 'padding-top'), 10) + parseInt(Util.DOM.getStyle(el, 'padding-bottom'), 10); 
-				retval += parseInt(Util.DOM.getStyle(el, 'margin-top'), 10) + parseInt(Util.DOM.getStyle(el, 'margin-bottom'), 10); 
-				retval += parseInt(Util.DOM.getStyle(el, 'border-top-width'), 10) + parseInt(Util.DOM.getStyle(el, 'border-bottom-width'), 10); 
+				retval += parseInt(Util.DOM.getStyle(el, 'padding-top'), 10) + parseInt(Util.DOM.getStyle(el, 'padding-bottom'), 10);
+				retval += parseInt(Util.DOM.getStyle(el, 'margin-top'), 10) + parseInt(Util.DOM.getStyle(el, 'margin-bottom'), 10);
+				retval += parseInt(Util.DOM.getStyle(el, 'border-top-width'), 10) + parseInt(Util.DOM.getStyle(el, 'border-bottom-width'), 10);
 								
 				return retval;
 			

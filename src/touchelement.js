@@ -42,7 +42,7 @@
 	
 }
 (
-	window, 
-	window.klass, 
+	window,
+	window.klass,
 	window.Code.Util
 ));

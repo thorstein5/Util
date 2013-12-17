@@ -76,12 +76,12 @@
 			 */
 			isChildOf: function(childEl, parentEl)
 			{
-				if (parentEl === childEl){ 
-					return false; 
+				if (parentEl === childEl){
+					return false;
 				}
 				while (childEl && childEl !== parentEl)
-				{ 
-					childEl = childEl.parentNode; 
+				{
+					childEl = childEl.parentNode;
 				}
 
 				return childEl === parentEl;
@@ -96,7 +96,7 @@
 				if (Util.isNothing(contextEl)){
 					contextEl = window.document;
 				}
-				var 
+				var
 					els = $(selectors, contextEl),
 					retval = [],
 					i, j;
