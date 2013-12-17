@@ -3,13 +3,10 @@
 	
 	<property file="build.properties"/>
 	
-	<!--
-	<taskdef name="jsmin" classname="net.matthaynes.jsmin.JSMin_Task" classpath="tools/jsmin/jsmin.0.2.4.jar"/>
-	-->
-	
 	<taskdef name="jscomp" classname="com.google.javascript.jscomp.ant.CompileTask" classpath="tools/google-closure/compiler.jar" />
 	
-	<taskdef name="jslint" classname="com.googlecode.jslint4java.ant.JSLintTask" classpath="tools/jslint4java-2.0.2/jslint4java-2.0.2.jar" />
+	<taskdef name="jshint" classname="com.philmander.jshint.JsHintAntTask" classpath="tools/ant-jshint-0.3.6/ant-jshint-0.3.6-SNAPSHOT-deps.jar" />
+	
 	
 	
 	<target name="build">
@@ -45,11 +42,12 @@
 	
 	<target name="checkJS">
 		
-		<jslint options="browser,indent=0,plusplus,sloppy,white,newcap,nomen,regexp,forin,unparam">
-			<formatter type="plain" />		
-			<fileset dir="${project.src.dir}" includes="*.js" />
-		</jslint>
-	
+		<jshint dir="${project.src.dir}" jshintSrc="tools\jshint-2.3.0\jshint.js" options="es3=true,browser=true,jquery=true,undef=true,unused=vars,strict=false,noarg=true,plusplus=false,curly=true,trailing=true">
+			<include name="**/*.js"/>
+			<exclude name="**/*.min.js"/>
+			<exclude name="**/lib/*.js"/>
+		</jshint>
+		
 	</target>
 	
 	
@@ -117,8 +115,6 @@
 		<fixcrlf srcdir="${project.build.artifactdir}" includes="**/*.log,**/*.js,**/*.txt,**/*.css,**/*.html" eol="crlf" />
 		
 	</target>
-	
-	
 	
 	
 	
