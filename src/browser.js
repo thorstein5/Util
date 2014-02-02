@@ -140,7 +140,7 @@
 				}
 			}
 
-			Util.DOM.removeChild(el);
+			Util.DOM.removeChild(el, el.parentNode);
 
 			this.is3dSupported = (has3d !== undefined && has3d.length > 0 && has3d !== "none");
 
