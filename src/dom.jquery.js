@@ -424,7 +424,7 @@
 			
 			
 			/*
-			 * Function: width 
+			 * Function: width
 			 * Content width, exludes padding
 			 */
 			width: function(el, value){
@@ -451,7 +451,7 @@
 			
 			
 			/*
-			 * Function: height 
+			 * Function: height
 			 * Content height, excludes padding
 			 */
 			height: function(el, value){
