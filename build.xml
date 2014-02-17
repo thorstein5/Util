@@ -42,7 +42,7 @@
 	
 	<target name="checkJS">
 		
-		<jshint dir="${project.src.dir}" jshintSrc="tools\jshint-2.3.0\jshint.js" options="es3=true,browser=true,jquery=true,undef=true,unused=vars,strict=false,noarg=true,plusplus=false,curly=true,trailing=true">
+		<jshint dir="${project.src.dir}" jshintSrc="tools\jshint-2.4.3\jshint.js" options="es3=true,browser=true,jquery=true,undef=true,unused=vars,strict=false,noarg=true,plusplus=false,curly=true,trailing=true">
 			<include name="**/*.js"/>
 			<exclude name="**/*.min.js"/>
 			<exclude name="**/lib/*.js"/>

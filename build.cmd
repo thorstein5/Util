@@ -1,2 +1,2 @@
-call tools\apache-ant-1.9.2\bin\ant
-IF NOT %ERRORLEVEL% == 0 pause
+Call tools\apache-ant-1.9.3\bin\ant
+If Errorlevel 1 Pause
