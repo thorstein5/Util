@@ -539,7 +539,7 @@
 			
 			e.preventDefault();
 
-			if (this.preventGhostEvents("mouse", Util.Events.getMousePosition(e))){
+			if (this.preventGhostEvents('mouse', Util.Events.getMousePosition(e))){
 				return;
 			}
 

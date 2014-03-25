@@ -19,6 +19,7 @@
 		firefox: null,
 		fennec: null,
 		mozilla: null,
+		mercury: null,
 		
 		android: null,
 		blackberry: null,
@@ -56,6 +57,7 @@
 			this.firefox = /Firefox/i.test(this.ua);
 			this.fennec = /Fennec/i.test(this.ua);
 			this.mozilla = /mozilla/i.test(this.ua) && !/(compatible|webkit)/.test(this.ua);
+			this.mercury = /Mercury/i.test(this.ua);
 			this.android = /android/i.test(this.ua);
 			this.blackberry = /blackberry/i.test(this.ua);
 			this.iOS = (/iphone|ipod|ipad/gi).test(window.navigator.platform);
