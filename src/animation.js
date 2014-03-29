@@ -1,4 +1,3 @@
-// Util
 // Copyright (c) %%year%% Code Computerlove and other contributors
 // Licensed under the MIT license
 // version: %%version%%
@@ -138,12 +137,14 @@
 			
 			
 			/*
-			 * Function: fadeIn
+			 * Function: fadeTo
 			 */
-			fadeIn: function(el, speed, callback, timingFunction, opacity){
+			fadeTo: function(el, opacity, speed, callback, timingFunction){
 				
-				opacity = Util.coalesce(opacity, 1);
-				if (opacity <= 0){
+				if (opacity < 0){
+					opacity = 0;
+				}
+				if (opacity > 1){
 					opacity = 1;
 				}
 				
@@ -153,12 +154,6 @@
 						callback(el);
 						return;
 					}
-				}
-				
-				var currentOpacity = Util.DOM.getStyle(el, 'opacity');
-				
-				if (currentOpacity >= 1){
-					Util.DOM.setStyle(el, 'opacity', 0);
 				}
 				
 				if (Util.Browser.isCSSTransitionSupported){
@@ -173,10 +168,20 @@
 			
 			
 			/*
-			 * Function: fadeTo
+			 * Function: fadeIn
 			 */
-			fadeTo: function(el, opacity, speed, callback, timingFunction){
-				this.fadeIn(el, speed, callback, timingFunction, opacity);
+			fadeIn: function(el, speed, callback, timingFunction, opacity){
+				
+				opacity = Util.coalesce(opacity, 1);
+				
+				var currentOpacity = Util.DOM.getStyle(el, 'opacity');
+				
+				if (currentOpacity >= 1){
+					Util.DOM.setStyle(el, 'opacity', 0);
+				}
+				
+				this.fadeTo(el, opacity, speed, callback, timingFunction);
+				
 			},
 			
 			
@@ -184,28 +189,17 @@
 			/*
 			 * Function: fadeOut
 			 */
-			fadeOut: function(el, speed, callback, timingFunction){
+			fadeOut: function(el, speed, callback, timingFunction, opacity){
 				
-				if (speed <= 0){
-					Util.DOM.setStyle(el, 'opacity', 0);
-					if (!Util.isNothing(callback)){
-						callback(el);
-						return;
-					}
+				opacity = Util.coalesce(opacity, 0);
+				
+				var currentOpacity = Util.DOM.getStyle(el, 'opacity');
+				
+				if (currentOpacity <= 0){
+					Util.DOM.setStyle(el, 'opacity', 1);
 				}
 				
-				if (Util.Browser.isCSSTransitionSupported){
-				
-					this._applyTransition(el, 'opacity', 0, speed, callback, timingFunction);
-					
-				}
-				else{
-				
-					window.jQuery(el).fadeTo(speed, 0, callback);
-				
-				}
-				
-				this._inTransition = false;
+				this.fadeTo(el, opacity, speed, callback, timingFunction);
 				
 			},
 			

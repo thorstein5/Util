@@ -1,13 +1,13 @@
-// Copyright (c) %%year%% Thorstein S. Overland and other contributors
+// Copyright (c) %%year%% Thorstein Overland and other contributors
 // Licensed under the MIT license
 // version: %%version%%
 
-// clickzapper.js
+// ghostclick.js
 (function (window, Util) {
 	
 	Util.extend(Util, {
 		
-		ClickZapper: {
+		GhostClick: {
 			
 			points: null,
 			onClickHandler: null,
@@ -16,9 +16,9 @@
 			
 			
 			/*
-			 * Function: preventGhostClick
+			 * Function: preventClick
 			 */
-			preventGhostClick: function(x, y){
+			preventClick: function(x, y){
 				
 				if (Util.isNothing(this.onClickHandler)){
 					this.points = [];
@@ -31,16 +31,16 @@
 					Util.Events.add(document, 'click', this.onClickHandler);
 				}
 				
-				window.setTimeout(this.pop, this.ghostClickTimeout);
+				window.setTimeout(this.popClick, this.ghostClickTimeout);
 				
 			},
 			
 			
 			
 			/*
-			 * Function: pop
+			 * Function: popClick
 			 */
-			pop: function(){
+			popClick: function(){
 				
 				Util.ClickZapper.points.splice(0, 2);
 				

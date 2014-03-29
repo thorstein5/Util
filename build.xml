@@ -63,6 +63,7 @@
 			<fileset dir="." includes="${project.src.dir}/animation.js" />
 			<fileset dir="." includes="${project.src.dir}/touchelement.js" />
 			<fileset dir="." includes="${project.src.dir}/touchelement.class.js" />
+			<fileset dir="." includes="${project.src.dir}/ghostclick.js" />
 			
 		</concat>
 		

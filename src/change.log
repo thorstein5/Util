@@ -1,52 +1,48 @@
-1.0.0 24.08.11 - Ste Brennan
-----------------------------
+1.0.0 2011-08-24 - Ste Brennan
+----------------------------------------------
 Initial release
 
 
-1.0.1 26.08.11 - Ste Brennan
-----------------------------
+1.0.1 2011-08-26 - Ste Brennan
+----------------------------------------------
 - Util.arrayIndexOf
 
 
-1.0.2 05.09.11 - Ste Brennan
-----------------------------
+1.0.2 2011-09-05 - Ste Brennan
+----------------------------------------------
 - Modified parameters to the touchelement class
 
 
-1.0.3 12.09.11 - Ste Brennan
-----------------------------
+1.0.3 2011-09-12 - Ste Brennan
+----------------------------------------------
 - Modified arrayIndexOf to include optional property to check against
-
 - Added new option to TouchElementClass "defaultCaptureSettings.preventDefaultTouchEvents". Default - true
-
 - Added "fadeTo" to animation
-
 - Upgraded to jQuery 1.6.3
 
 
-1.0.4 22.09.11 - Ste Brennan
-----------------------------
+1.0.4 2011-09-22 - Ste Brennan
+----------------------------------------------
 - Added firefox to browser detection
-
 - Fixed problem with setStyle in the jQuery implementation
-
 - Upgraded to jQuery 1.6.4
 
 
-1.0.5 22.09.11 - Ste Brennan
-----------------------------
+1.0.5 2011-09-22 - Ste Brennan
+----------------------------------------------
 - Added e.targetEl and e.currentTargetEl to TouchElementClass events
-
 - Fixed mouse out to work like IR mouseleave
 
 
-1.0.6 27.09.11 - Ste Brennan
-----------------------------
+1.0.6 2011-09-27- Ste Brennan
+----------------------------------------------
 - Added Fennec to Browser
-
 - Added isLandscape to Browser
 
-1.1.0 25.03.14 - Thorstein Overland
-----------------------------
-- Updated the scripts, tools, klass and jquery
-- Added ClickZapper to capture ghost clicks
+
+1.1.0 2014-03-29 - Thorstein Overland
+----------------------------------------------
+- Updated the scripts, tools, klass and jQuery
+- Added SlideTo to Animation
+- Added Mercury to Browser
+- Added GhostClick to capture ghost clicks

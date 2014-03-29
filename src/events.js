@@ -1,4 +1,3 @@
-// Util
 // Copyright (c) %%year%% Code Computerlove and other contributors
 // Licensed under the MIT license
 // version: %%version%%
@@ -206,8 +205,8 @@
 					step: false
 				};
 				
-				if (!Util.isNothing(event.originalEvent.deltaX)){
-					delta.x = -event.originalEvent.deltaX;
+				if (!Util.isNothing(event.deltaX)){
+					delta.x = -event.deltaX;
 					
 					delta.step = (Math.abs(delta.x) === 3);
 					if (Math.abs(delta.x) > 3){
@@ -215,8 +214,8 @@
 					}
 				}
 				
-				if (!Util.isNothing(event.originalEvent.deltaY)){
-					delta.y = -event.originalEvent.deltaY;
+				if (!Util.isNothing(event.deltaY)){
+					delta.y = -event.deltaY;
 					
 					if (!delta.step){
 						delta.step = (Math.abs(delta.y) === 3);
@@ -228,15 +227,15 @@
 					return delta;
 				}
 				
-				if (!Util.isNothing(event.originalEvent.wheelDelta)){
-					delta.y = event.originalEvent.wheelDelta;
+				if (!Util.isNothing(event.wheelDelta)){
+					delta.y = event.wheelDelta;
 					delta.step = true;
 					
 					return delta;
 				}
 				
-				if (!Util.isNothing(event.originalEvent.detail)){
-					delta.y = -event.originalEvent.detail / 3;
+				if (!Util.isNothing(event.detail)){
+					delta.y = -event.detail / 3;
 					delta.step = true;
 				}
 				
