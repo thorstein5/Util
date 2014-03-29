@@ -42,9 +42,9 @@
 			 */
 			popClick: function(){
 				
-				Util.ClickZapper.points.splice(0, 2);
+				Util.GhostClick.points.splice(0, 2);
 				
-				if (Util.ClickZapper.points.length < 2){
+				if (Util.GhostClick.points.length < 2){
 					Util.Events.remove(document, 'click', this.onClickHandler);
 				}
 				
