@@ -40,9 +40,10 @@ Initial release
 - Added isLandscape to Browser
 
 
-1.1.0 2014-03-29 - Thorstein Overland
+1.1.0 2014-04-21 - Thorstein Overland
 ----------------------------------------------
 - Updated the scripts, tools, klass and jQuery
 - Added SlideTo to Animation
 - Added Mercury to Browser
-- Added GhostClick to capture ghost clicks
+- Added GhostClick to capture "ghost clicks"
+- Added support for zoom and rotation for any multi-touch device

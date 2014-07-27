@@ -10,42 +10,44 @@
 		GhostClick: {
 			
 			points: null,
-			onClickHandler: null,
+			elements: null,
+			onClickPointHandler: null,
+			onClickElementHandler: null,
 			ghostClickTimeout: 1000,
 			
 			
 			
 			/*
-			 * Function: preventClick
+			 * Function: preventClickPoint
 			 */
-			preventClick: function(x, y){
+			preventClickPoint: function(x, y){
 				
-				if (Util.isNothing(this.onClickHandler)){
+				if (Util.isNothing(this.onClickPointHandler)){
 					this.points = [];
-					this.onClickHandler = this.onClick.bind(this);
+					this.onClickPointHandler = this.onClickPoint.bind(this);
+				}
+				
+				if (this.points.length < 2){
+					Util.Events.add(document, 'click', this.onClickPointHandler);
 				}
 				
 				this.points.push(x, y);
 				
-				if (this.points.length < 2){
-					Util.Events.add(document, 'click', this.onClickHandler);
-				}
-				
-				window.setTimeout(this.popClick, this.ghostClickTimeout);
+				window.setTimeout(this.popClickPoint, this.ghostClickTimeout);
 				
 			},
 			
 			
 			
 			/*
-			 * Function: popClick
+			 * Function: popClickPoint
 			 */
-			popClick: function(){
+			popClickPoint: function(){
 				
 				Util.GhostClick.points.splice(0, 2);
 				
 				if (Util.GhostClick.points.length < 2){
-					Util.Events.remove(document, 'click', this.onClickHandler);
+					Util.Events.remove(document, 'click', Util.GhostClick.onClickPointHandler);
 				}
 				
 			},
@@ -53,12 +55,12 @@
 			
 			
 			/*
-			 * Function: onClick
+			 * Function: onClickPoint
 			 */
-			onClick: function(e){
+			onClickPoint: function(e){
 				
 				var
-					x, y, i;
+					i, x, y;
 				
 				for (i = 0; i < this.points.length; i += 2) {
 					x = this.points[i];
@@ -68,6 +70,51 @@
 						e.preventDefault();
 					}
 				}
+				
+			},
+			
+			
+			
+			/*
+			 * Function: preventClickElement
+			 */
+			preventClickElement: function(el){
+				
+				if (Util.isNothing(this.onClickElementHandler)){
+					this.elements = [];
+					this.onClickElementHandler = this.onClickElement.bind(this);
+				}
+				
+				Util.Events.add(el, 'click', this.onClickElementHandler);
+				
+				this.elements.push(el);
+				
+				window.setTimeout(this.popClickElement, this.ghostClickTimeout);
+				
+			},
+			
+			
+			
+			/*
+			 * Function: popClickElement
+			 */
+			popClickElement: function(){
+				
+				Util.Events.remove(Util.GhostClick.elements[0], 'click', Util.GhostClick.onClickElementHandler);
+				
+				Util.GhostClick.elements.splice(0, 1);
+				
+			},
+			
+			
+			
+			/*
+			 * Function: onClickElement
+			 */
+			onClickElement: function(e){
+				
+				e.stopPropagation();
+				e.preventDefault();
 				
 			}
 			

@@ -63,10 +63,12 @@
 		isMSGesture: null,
 
 		lastGesturePinch: null,
+		lastGestureRotation: null,
 		pointerDown: null,
 
 		currentInputDeviceType: null,
-		
+		allowVerticalScroll: null,
+
 		/*
 		 * Function: dispose
 		 */
@@ -118,11 +120,14 @@
 			this.touchEndPoint = { x: 0, y: 0 };
 
 			this.lastGesturePinch = 0;
+			this.lastGestureRotation = 0;
 
 			this.touchEndTime = new Date();
 			this.pointerDown = {};
 			this.isGesture = false;
 			this.isMSGesture = false;
+
+			this.allowVerticalScroll = false;
 
 		},
 
@@ -296,6 +301,25 @@
 			}
 
 			return scale;
+
+		},
+
+
+
+		/*
+		 * Function: getTouchRotation
+		 */
+		getTouchRotation: function(touches){
+
+			var rotation = 0;
+
+			if (touches.length > 1){
+				rotation = Math.atan2(touches[1].pageY - touches[0].pageY, touches[1].pageX - touches[0].pageX) - this.lastGestureRotation;
+
+				this.lastGestureRotation = this.lastGestureRotation + rotation;
+			}
+
+			return rotation;
 
 		},
 
@@ -694,6 +718,8 @@
 				return;
 			}
 
+			this.allowVerticalScroll = this.captureSettings.allowVerticalScroll;
+
 			// Temporarily no longer need mouse events
 			if (Util.Browser.isMouseSupported){
 				Util.Events.remove(this.el, 'mousedown', this.mouseDownHandler);
@@ -737,8 +763,31 @@
 				touches = touchEvent.touches,
 				point = this.getTouchPoint(touches);
 
-			if (this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - point.x) < Math.abs(this.touchStartPoint.y - point.y)){
-				return;
+			if (this.allowVerticalScroll){
+				// Temporarily disable allowVerticalScroll if swiped past 20 points
+				this.allowVerticalScroll = (Math.abs(this.touchStartPoint.x - point.x) < 20);
+
+				if (this.allowVerticalScroll && (Math.abs(this.touchStartPoint.x - point.x) < Math.abs(this.touchStartPoint.y - point.y))){
+					if (this.captureSettings.move){
+						Util.Events.remove(this.el, 'touchmove', this.touchMoveHandler);
+					}
+					Util.Events.remove(this.el, 'touchend', this.touchEndHandler);
+
+					if (Util.Browser.isMouseSupported){
+						Util.Events.add(this.el, 'mousedown', this.mouseDownHandler);
+					}
+
+					Util.Events.fire(this, {
+						type: Util.TouchElement.EventTypes.onTouch,
+						target: this,
+						action: Util.TouchElement.ActionTypes.touchMoveEnd,
+						point: point,
+						targetEl: e.target,
+						currentTargetEl: e.currentTarget
+					});
+
+					return;
+				}
 			}
 
 			if (this.captureSettings.preventDefaultTouchEvents){
@@ -786,10 +835,6 @@
 
 			this.touchEndTime = new Date();
 			this.touchEndPoint = this.getTouchPoint(touches);
-
-			if (this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - this.touchEndPoint.x) < Math.abs(this.touchStartPoint.y - this.touchEndPoint.y)){
-				return;
-			}
 
 			if (this.captureSettings.preventDefaultTouchEvents){
 				e.preventDefault();
@@ -842,6 +887,8 @@
 
 			this.pointerDown[touchEvent.pointerId] = true;
 
+			this.allowVerticalScroll = this.captureSettings.allowVerticalScroll;
+
 			// Add move/up/out
 			if (this.captureSettings.move){
 				Util.Events.add(this.el, this.pointerMoveEventName, this.pointerMoveHandler);
@@ -881,8 +928,31 @@
 
 			point = this.getPointerPoint(touchEvent);
 
-			if (this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - point.x) < Math.abs(this.touchStartPoint.y - point.y)){
-				return;
+			if (this.allowVerticalScroll){
+				// Temporarily disable allowVerticalScroll if swiped past 20 points
+				this.allowVerticalScroll = (Math.abs(this.touchStartPoint.x - point.x) < 20);
+
+				if (this.allowVerticalScroll && (Math.abs(this.touchStartPoint.x - point.x) < Math.abs(this.touchStartPoint.y - point.y))){
+					if (this.captureSettings.move){
+						Util.Events.remove(this.el, this.pointerMoveEventName, this.pointerMoveHandler);
+					}
+					Util.Events.remove(this.el, this.pointerUpEventName, this.pointerUpHandler);
+					Util.Events.remove(this.el, this.pointerOutEventName, this.pointerOutHandler);
+
+					this.pointerDown[touchEvent.pointerId] = false;
+					this.currentInputDeviceType = null;
+
+					Util.Events.fire(this, {
+						type: Util.TouchElement.EventTypes.onTouch,
+						target: this,
+						action: Util.TouchElement.ActionTypes.touchMoveEnd,
+						point: point,
+						targetEl: e.target,
+						currentTargetEl: e.currentTarget
+					});
+
+					return;
+				}
 			}
 
 			if (this.captureSettings.preventDefaultTouchEvents){
@@ -925,10 +995,6 @@
 
 			this.touchEndTime = new Date();
 			this.touchEndPoint =  this.getPointerPoint(touchEvent);
-
-			if (this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - this.touchEndPoint.x) < Math.abs(this.touchStartPoint.y - this.touchEndPoint.y)){
-				return;
-			}
 
 			if (this.captureSettings.preventDefaultTouchEvents){
 				e.preventDefault();
@@ -980,24 +1046,14 @@
 			this.touchEndTime = new Date();
 			this.touchEndPoint =  this.getPointerPoint(touchEvent);
 
-			if (this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - this.touchEndPoint.x) < Math.abs(this.touchStartPoint.y - this.touchEndPoint.y)){
-				return;
-			}
-
-			if (this.captureSettings.preventDefaultTouchEvents){
-				e.preventDefault();
-			}
-
 			Util.Events.fire(this, {
 				type: Util.TouchElement.EventTypes.onTouch,
 				target: this,
-				action: Util.TouchElement.ActionTypes.touchEnd,
+				action: Util.TouchElement.ActionTypes.touchMoveEnd,
 				point: this.touchEndPoint,
 				targetEl: e.target,
 				currentTargetEl: e.currentTarget
 			});
-
-			this.fireTouchEvent(e);
 
 		},
 
@@ -1011,11 +1067,13 @@
 			e.preventDefault();
 
 			this.lastGesturePinch = 0;
+			this.lastGestureRotation = 0;
 
 			var
 				touchEvent = Util.Events.getTouchEvent(e),
 				touches = touchEvent.touches,
-				scale = this.getTouchPinchScale(touches);
+				scale = this.getTouchPinchScale(touches),
+				rotation = this.getTouchRotation(touches);
 
 			if (!this.isGesture){
 				Util.Events.add(this.el, 'touchstart', this.touchGestureStartHandler);
@@ -1036,7 +1094,7 @@
 				target: this,
 				action: Util.TouchElement.ActionTypes.gestureStart,
 				scale: scale,
-				rotation: 0,
+				rotation: rotation,
 				targetEl: e.target,
 				currentTargetEl: e.currentTarget
 			});
@@ -1055,20 +1113,21 @@
 			var
 				touchEvent = Util.Events.getTouchEvent(e),
 				touches = touchEvent.touches,
-				scale;
+				scale, rotation;
 
 			if (touches.length <= 1){
 				return;
 			}
 
 			scale = this.getTouchPinchScale(touches);
+			rotation = this.getTouchRotation(touches);
 
 			Util.Events.fire(this, {
 				type: Util.TouchElement.EventTypes.onTouch,
 				target: this,
 				action: Util.TouchElement.ActionTypes.gestureChange,
 				scale: scale,
-				rotation: 0,
+				rotation: rotation,
 				targetEl: e.target,
 				currentTargetEl: e.currentTarget
 			});
@@ -1087,7 +1146,7 @@
 			var
 				touchEvent = Util.Events.getTouchEvent(e),
 				touches = (!Util.isNothing(touchEvent.changedTouches)) ? touchEvent.changedTouches : touchEvent.touches,
-				scale;
+				scale, rotation;
 
 			if (touches.length > 1){
 				return;
@@ -1095,13 +1154,14 @@
 
 			if (touches.length === 1){
 				scale = this.getTouchPinchScale(touches);
+				rotation = this.getTouchRotation(touches);
 
 				Util.Events.fire(this, {
 					type: Util.TouchElement.EventTypes.onTouch,
 					target: this,
 					action: Util.TouchElement.ActionTypes.gestureEnd,
 					scale: scale,
-					rotation: 0,
+					rotation: rotation,
 					targetEl: e.target,
 					currentTargetEl: e.currentTarget
 				});
@@ -1234,9 +1294,9 @@
 				point,
 				touchEvent = Util.Events.getTouchEvent(e);
 
-			e.preventDefault();
-
 			if (touchEvent.scale !== 1 || touchEvent.rotation !== 0 || this.isGesture){
+				e.preventDefault();
+
 				if (this.isGesture) {
 					Util.Events.fire(this, {
 						type: Util.TouchElement.EventTypes.onTouch,
@@ -1266,8 +1326,8 @@
 			if (this.captureSettings.move && !this.isGesture){
 				point = this.getPointerPoint(touchEvent);
 
-				if (this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - point.x) < Math.abs(this.touchStartPoint.y - point.y)){
-					return;
+				if (this.captureSettings.preventDefaultTouchEvents){
+					e.preventDefault();
 				}
 
 				Util.Events.fire(this, {
@@ -1289,8 +1349,6 @@
 		 */
 		onMSGestureEnd: function(e){
 
-			e.preventDefault();
-
 			var touchEvent = Util.Events.getTouchEvent(e);
 
 			Util.Events.remove(this.el, this.pointerOutEventName, this.pointerOutHandler);
@@ -1306,9 +1364,7 @@
 			this.isMSGesture = false;
 
 			if(this.isGesture){
-				if (this.captureSettings.preventDefaultTouchEvents){
-					e.preventDefault();
-				}
+				e.preventDefault();
 
 				Util.Events.fire(this, {
 					type: Util.TouchElement.EventTypes.onTouch,
@@ -1322,10 +1378,6 @@
 				this.isGesture = false;
 			}
 			else {
-				if(this.captureSettings.allowVerticalScroll && Math.abs(this.touchStartPoint.x - this.touchEndPoint.x) < Math.abs(this.touchStartPoint.y - this.touchEndPoint.y)){
-					return;
-				}
-
 				if (this.captureSettings.preventDefaultTouchEvents){
 					e.preventDefault();
 				}
